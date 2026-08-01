@@ -1019,26 +1019,33 @@ IconButton(
 
 **ข้อ 1:** Material 3 ต่างจาก Material 2 อย่างไรในด้าน Color System?
 
-> **คำตอบ:** Material 3 ใช้ระบบสีแบบ Dynamic Color และ Tonal Palette ซึ่งสีในแอปสามารถเปลี่ยนไปตาม Wallpaper ของเครื่องผู้ใช้ (ใน Android) หรือตาม Seed Color ที่กำหนดได้ สีจะถูกแบ่งออกเป็นคู่ความสัมพันธ์ที่ชัดเจนมากขึ้น เช่น `primary` คู่กับ `onPrimary`, `surface` คู่กับ `onSurface` เพื่อรับประกันคอนทราสต์ที่เหมาะสม แตกต่างจาก Material 2 ที่มักจะใช้ระบบ Static Color (กำหนดค่า Primary, Accent คงที่)
+```
+คำตอบ: Material 3 ใช้ระบบสีแบบ Dynamic Color และ Tonal Palette ซึ่งสีในแอปสามารถเปลี่ยนไปตาม Wallpaper ของเครื่องผู้ใช้ (ใน Android) หรือตาม Seed Color ที่กำหนดได้ สีจะถูกแบ่งออกเป็นคู่ความสัมพันธ์ที่ชัดเจนมากขึ้น เช่น primary คู่กับ onPrimary, surface คู่กับ onSurface เพื่อรับประกันคอนทราสต์ที่เหมาะสม แตกต่างจาก Material 2 ที่ใช้ระบบ Static Color (กำหนด Primary, Accent คงที่)
+```
 
 **ข้อ 2:** เมื่อแปลง Figma Design เป็น Flutter Widget พบปัญหาอะไรบ้าง และแก้ไขอย่างไร?
 
-> **คำตอบ:** ปัญหาที่พบบ่อยคือ **Layout Overflow (จอเหลืองดำ)** เนื่องจากใน Figma การทำ Auto Layout อาจไม่ได้กำหนด Constraint ที่ตายตัว เมื่อนำมาเขียนเป็น `Row` หรือ `Column` ใน Flutter แล้วเนื้อหาล้นหน้าจอ 
-> **วิธีแก้ไข:** ใช้ `Expanded` หรือ `Flexible` ห่อหุ้ม Widget ที่ต้องการให้ขยายตัวได้ตามพื้นที่ หรือใช้ `SingleChildScrollView` เพื่อให้หน้าจอเลื่อนได้
+```
+คำตอบ: ปัญหาที่พบบ่อยคือ Layout Overflow (จอเหลืองดำ) เนื่องจากใน Figma การทำ Auto Layout อาจไม่ได้กำหนด Constraint ที่ตายตัว เมื่อนำมาเขียนเป็น Row หรือ Column ใน Flutter แล้วเนื้อหาล้นหน้าจอ แก้ไขโดยการใช้ Expanded, Flexible ห่อหุ้ม Widget ที่ขยายตัวได้ หรือใช้ SingleChildScrollView เพื่อให้หน้าจอเลื่อนได้
+```
 
 **ข้อ 3:** Code ที่ AI สร้างให้นั้นสมบูรณ์แค่ไหน? ต้องปรับปรุงอะไรบ้าง?
 
-> **คำตอบ:** โค้ดด้าน UI มีความสมบูรณ์สูงมาก โครงสร้างสะอาดและรองรับ Material 3 เต็มรูปแบบ แต่ขาดความสมบูรณ์ด้าน Business Logic 
-> **สิ่งที่ต้องปรับปรุง:** 
-> - เพิ่ม Parameter สำหรับรับ Callback Function (เช่น `onFollowPressed`, `onMessagePressed`) เพื่อให้ปุ่มสามารถตอบสนองได้ 
-> - ควรเพิ่ม `maxLines: 1` และ `overflow: TextOverflow.ellipsis` ใน `Text` เพื่อป้องกันเลย์เอาต์พังเมื่อข้อมูลยาวเกินไป
+```
+คำตอบ: โค้ดด้าน UI มีความสมบูรณ์สูงมาก โครงสร้างสะอาดและรองรับ Material 3 เต็มรูปแบบ แต่ขาดความสมบูรณ์ด้าน Business Logic ต้องปรับปรุงโดยการเพิ่ม Parameter สำหรับรับ Callback Function (เช่น onFollowPressed, onMessagePressed) เพื่อให้ปุ่มตอบสนองได้ และควรเพิ่ม maxLines: 1 และ overflow: TextOverflow.ellipsis ป้องกันเลย์เอาต์พังเมื่อข้อมูลยาวเกินไป
+```
 
 **ข้อ 4:** ถ้าจะนำ UI ที่ออกแบบไปใช้กับ Project จริง จะปรับปรุงอะไรบ้าง?
 
-> **คำตอบ:**
-> 1. **ดึงข้อมูลจริง (Data Fetching):** ดึงข้อมูลจากตัวแปร State หรือ API แทนการใส่ข้อมูลจำลอง (Mock data)
-> 2. **Responsive Design:** ปรับแต่งให้เป็น Responsive เพื่อให้ Card แสดงผลได้สวยงามทั้งบนหน้าจอมือถือ แท็บเล็ต และเว็บ
-> 3. **Localization:** Extract ข้อความที่ Hardcode ไว้ (เช่น คำว่า 'Posts', 'Followers', 'Following') ไปเก็บในไฟล์ Localization เพื่อรองรับแอปหลายภาษา
+```
+คำตอบ:
+
+1. ดึงข้อมูล (Data) จากตัวแปร State หรือ API แทนการใส่ข้อมูลจำลอง (Mock data)
+
+2. ปรับแต่งให้เป็น Responsive Design เพื่อให้ Card แสดงผลได้สวยงามทั้งบนหน้าจอมือถือ แท็บเล็ต และเว็บ
+
+3. ทำการ Extract ข้อความที่ Hardcode ไว้ (เช่น คำว่า 'Posts', 'Followers', 'Following') ไปใช้ไฟล์ Localization เพื่อรองรับหลายภาษา
+```
 
 ---
 
