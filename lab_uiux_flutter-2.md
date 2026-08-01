@@ -935,12 +935,12 @@ Add brief comments explaining each section.
 
 ### ขั้นตอนที่ 4.3: วิเคราะห์ Code ที่ได้
 
-| คำถาม                                           | คำตอบ                                                                                                                                                                                                                                                           |
-| :---------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **AI ใช้ Widget อะไรสร้าง Avatar?**             | ใช้ **`CircleAvatar`** ครับ                                                                                                                                                                                                                                     |
-| **AI handle กรณี avatarUrl เป็น null อย่างไร?** | มีการเช็คเงื่อนไข `avatarUrl == null                                                                                                                                                                                                                            |     | avatarUrl!.isEmpty`ถ้าเป็นจริง (null หรือว่าง) จะใช้`Text` แสดงตัวอักษรย่อของชื่อ (`\_getInitials`) แทนรูปภาพ และใช้ `backgroundColor` ของ Theme |
-| **AI ใช้ color จาก Theme หรือ hardcode?**       | **ใช้ color จาก Theme ทั้งหมด** (Dynamic Colors) เช่น `colorScheme.surface`, `colorScheme.primaryContainer`, `colorScheme.onSurfaceVariant` โดยไม่มีการ Hardcode ค่าสี (เช่น `Colors.blue` หรือ Hex code) เลย                                                   |
-| **มีส่วนไหนที่ควรปรับปรุง?**                    | 1. ปุ่ม `FilledButton` และ `OutlinedButton` ยังไม่มีการรับค่า Callback function (เช่น `VoidCallback onFollow`) ทำให้ยังใช้งานจริงไม่ได้<br>2. ควรเพิ่มการจัดการ Overflow ของ Text เผื่อในกรณีที่ชื่อหรืออีเมลยาวเกินไป (เช่น `overflow: TextOverflow.ellipsis`) |
+| คำถาม | คำตอบ |
+| :--- | :--- |
+| **AI ใช้ Widget อะไรสร้าง Avatar?** | ใช้ **`CircleAvatar`** ครับ |
+| **AI handle กรณี avatarUrl เป็น null อย่างไร?** | มีการเช็คเงื่อนไข `avatarUrl == null \|\| avatarUrl!.isEmpty` ถ้าเป็นจริง (null หรือว่าง) จะใช้ `Text` แสดงตัวอักษรย่อของชื่อ (`_getInitials`) แทนรูปภาพ และใช้ `backgroundColor` ของ Theme |
+| **AI ใช้ color จาก Theme หรือ hardcode?** | **ใช้ color จาก Theme ทั้งหมด** (Dynamic Colors) เช่น `colorScheme.surface`, `colorScheme.primaryContainer`, `colorScheme.onSurfaceVariant` โดยไม่มีการ Hardcode ค่าสี (เช่น `Colors.blue` หรือ Hex code) เลย |
+| **มีส่วนไหนที่ควรปรับปรุง?** | 1. ปุ่ม `FilledButton` และ `OutlinedButton` ยังไม่มีการรับค่า Callback function (เช่น `VoidCallback onFollow`) ทำให้ยังใช้งานจริงไม่ได้<br>2. ควรเพิ่มการจัดการ Overflow ของ Text เผื่อในกรณีที่ชื่อหรืออีเมลยาวเกินไป (เช่น `overflow: TextOverflow.ellipsis`) |
 
 **ขั้นตอนที่ 4.4: นำ Code ไปใช้ใน Project**
 
