@@ -408,9 +408,6 @@ Screenshot หน้าจอ Design ทั้ง 3 หน้า และบั
    flutter create week03_ui_lab
    cd week03_ui_lab
    ```
-
-````
-
 3. เปิดด้วย VS Code:
    ```bash
    code .
